@@ -1,0 +1,36 @@
+# Using version 3
+version: '3'
+
+# Define the services
+services:
+
+    # Laravel app
+    laravel-app:
+        build:
+            # Context mean where is the Dockerfile
+            context: .
+            # Name of Dockerfile
+            dockerfile: Dockerfile
+        # Image name
+        image: laravel-app:v1
+        # Port mapping
+        ports:
+        - "8080:80"
+        # Container name
+        container_name: laravel-app
+
+    # Database
+    db:
+        # Using mysql version 8.3.0
+        image: mysql:8.3.0
+        # Port mapping for mysql
+        ports:
+          - "3306:3306"
+        # Environment for mysql database
+        environment:
+            - MYSQL_ROOT_PASSWORD=12345678
+            - MYSQL_DATABASE=laravel
+            - MYSQL_USER=laravel
+            - MYSQL_PASSWORD=12345678
+        # Container name
+        container_name: db-laravel-app
